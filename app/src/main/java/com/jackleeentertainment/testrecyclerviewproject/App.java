@@ -64,7 +64,6 @@ public class App extends Application {
         Log.d(TAG, "initFbaseDatabase()");
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseDatabase.setPersistenceEnabled(true);
-        Log.d(TAG, "firebaseDatabase.getApp().getMname() :" + firebaseDatabase.getApp().getName());
     }
 
     public static void initFbaseDatabaseRef() {
@@ -74,8 +73,8 @@ public class App extends Application {
 
     public static void initFbaseStorage() {
         firebaseStorage = FirebaseStorage.getInstance();
-        fbaseStorageRef = firebaseStorage.getReferenceFromUrl("gs://project-5788136259447833395.appspot.com");
-        Log.d(TAG, "firebaseStorage.getApp().getMname() :" + firebaseStorage.getApp().getName());
+        fbaseStorageRef = firebaseStorage.getReferenceFromUrl
+                ("gs://dotogether-21281.appspot.com");
 
     }
 
