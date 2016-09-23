@@ -56,8 +56,8 @@ public class MainActivity extends AppCompatActivity {
        arl = new ArrayList<>();
 
         App.fbaseDbRef
-                .child("user")
-                .child(userId)
+                .child("user_data")
+                .child(userId) // which is, "user1"
                 .addListenerForSingleValueEvent(
                         new ValueEventListener() {
                             @Override
