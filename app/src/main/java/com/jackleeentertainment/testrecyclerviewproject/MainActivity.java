@@ -18,34 +18,39 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
     static String TAG = "MainActivity";
-    public static FirebaseDatabase firebaseDatabase;
-    public static DatabaseReference fbaseDbRef;
-    public static FirebaseStorage firebaseStorage;
-    public static StorageReference firebaseStorageReferenceFromUrl;
-    static ArrayList<String> arl;
+     static ArrayList<String> arl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initFbaseDatabase();
-        initFbaseDatabaseRef();
-        setContentView(R.layout.activity_main);
+
 
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onPostResume();
+        initFbaseDatabase();
+        initFbaseDatabaseRef();
+        setContentView(R.layout.activity_main);
+        getUserSpecificArrayListOfIdsOfPostsFromFirebase("user1");
+    }
+
     public static void initFbaseDatabase() {
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        firebaseDatabase.setPersistenceEnabled(true);
-        Log.d(TAG, "firebaseDatabase.getApp().getMname() :"+firebaseDatabase.getApp().getName());
+        App.firebaseDatabase = FirebaseDatabase.getInstance();
+        App.firebaseDatabase.setPersistenceEnabled(true);
+        Log.d(TAG, "firebaseDatabase.getApp().getMname() :"+App.firebaseDatabase.getApp().getName());
     }
 
     public static void initFbaseDatabaseRef() {
         Log.d(TAG, "initFbaseDatabaseRef()");
-        fbaseDbRef = firebaseDatabase.getReference();
+        App.fbaseDbRef = App.firebaseDatabase.getReference();
     }
 
 
@@ -66,8 +71,13 @@ public class MainActivity extends AppCompatActivity {
                                 Iterable<DataSnapshot> i = dataSnapshot.getChildren();
 
                                 for (DataSnapshot d : i){
-                                    String key = dataSnapshot.getKey();
-                                    arl.add(key);
+                                    String key = dataSnapshot.getKey(); //user1
+                                    HashMap<String, Object> value =(HashMap<String, Object>)
+                                            dataSnapshot.getValue();  //postId,ts
+                                    for ( String keyOfMap : value.keySet() ) {
+                                        arl.add(keyOfMap);
+                                        Log.d("IdsOfPosts", key+ " , "+keyOfMap);
+                                    }
                                 }
 
                             }
@@ -93,6 +103,8 @@ public class MainActivity extends AppCompatActivity {
                                 String key = dataSnapshot.getKey();
                                 String value = dataSnapshot.getValue(String.class);
                                 textView.setText(key + " , "+value);
+                                Log.d(TAG, key + " , "+value);
+
                             }
 
                             @Override
