@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "537459890599-plrfffttgtfr1s9ohgueekk17qjic1s7.apps.googleusercontent.com",
+          "client_id": "537459890599-3po0q4mvaerj7lgnpriqbolhh1ca5chi.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.jackleeentertainment.testrecyclerviewproject",
-            "certificate_hash": "C345422500707A455B2B708FB81EB9429B6F34B4"
+            "certificate_hash": "A650A2BDE079765D84DB04831C4F20B8FDDC9676"
           }
         },
         {
